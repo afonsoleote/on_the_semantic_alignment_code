@@ -1,2 +1,1 @@
-# semantic_reliability
-# on_the_semantic_alignment_code
+# On the Semantic Alignment of Concept Probing
