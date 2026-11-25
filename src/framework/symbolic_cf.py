@@ -1,7 +1,6 @@
 import itertools
 import random
 
-
 class SymbolicCF:
     def flip(self, V, attributes):
         W = dict(V)
@@ -34,14 +33,10 @@ class SymbolicCF:
             frontier = next_frontier
         return found
 
-    def candidates(self, V, a, K, extra=0):
-        out = {}
-        others = sorted(b for b in V if b != a)
-        for chosen in itertools.combinations(others, extra):
-            for W in self.minimal(V, self.repairs(V, [a, *chosen], K)):
-                out[self.distance(V, W)] = W
-        return [out[d] for d in sorted(out, key=lambda d: (len(d), sorted(d)))]
-
+    def candidates(self, V, a, K):
+        found = self.minimal(V, self.repairs(V, [a], K))
+        return sorted(found, key=lambda W: (len(self.distance(V, W)), sorted(self.distance(V, W))))
+    
     def select(self, candidates, seed):
         return random.Random(seed).choice(candidates)
 
