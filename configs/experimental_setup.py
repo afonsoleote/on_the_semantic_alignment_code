@@ -55,6 +55,7 @@ GTSRBSetup = Setup(
     K=[
         Implies(Atom('Symbol_Speed80'), Atom('Symbol')),
         Implies(Atom('Black_Symbol'), Atom('Symbol')),
+        Implies(Atom('Symbol_Speed80'), Atom('Black_Symbol')),
         Not(And(Atom('Red_Ground'), Atom('White_Ground'))),
     ],
     concepts={
@@ -96,6 +97,11 @@ CelebASetup = Setup(
         Not(And(Atom('Black_Hair'), Atom('Brown_Hair'))),
         Not(And(Atom('Blond_Hair'), Atom('Brown_Hair'))),
         Not(And(Atom('Mustache'), Atom('No_Beard'))),
+        Implies(Atom('Bald'), Not(Atom('Bangs'))),
+        Implies(Atom('Bald'), Not(Or(Atom('Black_Hair'), Atom('Blond_Hair'),
+                                     Atom('Brown_Hair')))),
+        Implies(Atom('Mustache'), Atom('Male')),
+        Implies(Not(Atom('No_Beard')), Atom('Male')),
     ],
     concepts={
         'Bald': Atom('Bald'),
